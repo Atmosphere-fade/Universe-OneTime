@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<title>Universe OneTime</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+  margin:0;
+  background:white;
+  font-family:Arial;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+}
+
+.box{
+  width:90%;
+  max-width:400px;
+  text-align:center;
+}
+
+h1{
+  font-size:22px;
+}
+
+input{
+  width:100%;
+  padding:14px;
+  margin-top:15px;
+  border-radius:10px;
+  border:1px solid #ccc;
+}
+
+button{
+  width:100%;
+  padding:14px;
+  margin-top:10px;
+  border:none;
+  border-radius:10px;
+  background:black;
+  color:white;
+  font-size:16px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="box">
+  <h1>Insert One Time Code</h1>
+  <input id="code" placeholder="Enter code">
+  <button onclick="login()">Access</button>
+</div>
+
+<script>
+const VALID_CODES = [
+  "AGS20183",
+  "GM021834",
+  "GBCE10293",
+  "T3ST4PL4Y"
+];
+
+function login(){
+  const code = document.getElementById("code").value.trim();
+
+  if(!VALID_CODES.includes(code)){
+    alert("Codice non valido");
+    return;
+  }
+
+  if(localStorage.getItem("used_"+code)){
+    alert("Codice già utilizzato");
+    return;
+  }
+
+  localStorage.setItem("uot_code",code);
+  localStorage.setItem("uot_time",Date.now());
+  localStorage.setItem("used_"+code,"true");
+
+  window.location.href="movie.html";
+}
+</script>
+
+</body>
+</html>
